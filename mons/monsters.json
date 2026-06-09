@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "rarities": {
+    "Common": {
+      "spawnWeight": 75,
+      "mathRequired": 1,
+      "escapeTime": 6,
+      "catchRate": 1.0,
+      "color": "#7ed957"
+    },
+    "Rare": {
+      "spawnWeight": 20,
+      "mathRequired": 2,
+      "escapeTime": 10,
+      "catchRate": 0.5,
+      "color": "#4d8dff"
+    },
+    "Legendary": {
+      "spawnWeight": 5,
+      "mathRequired": 3,
+      "escapeTime": 15,
+      "catchRate": 0.33,
+      "color": "#ffb300"
+    }
+  },
+  "biomes": [
+    "Forest",
+    "Desert",
+    "Cave",
+    "Volcano",
+    "Sky",
+    "Cosmic"
+  ],
+  "monsters": [
+    {
+      "id": "spriggle",
+      "name": "Spriggle",
+      "rarity": "Common",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Spriggle.png",
+      "baseValue": 10
+    },
+    {
+      "id": "pebblit",
+      "name": "Pebblit",
+      "rarity": "Common",
+      "biome": "Cave",
+      "sprite": "assets/monsters/Pebblit.png",
+      "baseValue": 10
+    },
+    {
+      "id": "fizzbug",
+      "name": "Fizzbug",
+      "rarity": "Common",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Fizzbug.png",
+      "baseValue": 10
+    },
+    {
+      "id": "leafroo",
+      "name": "Leafroo",
+      "rarity": "Common",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Leafroo.png",
+      "baseValue": 10
+    },
+    {
+      "id": "puffinx",
+      "name": "Puffinx",
+      "rarity": "Common",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Puffinx.png",
+      "baseValue": 10
+    },
+    {
+      "id": "bramblet",
+      "name": "Bramblet",
+      "rarity": "Common",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Bramblet.png",
+      "baseValue": 10
+    },
+    {
+      "id": "glowlet",
+      "name": "Glowlet",
+      "rarity": "Common",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Glowlet.png",
+      "baseValue": 10
+    },
+    {
+      "id": "droplet",
+      "name": "Droplet",
+      "rarity": "Common",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Droplet.png",
+      "baseValue": 10
+    },
+    {
+      "id": "mossnap",
+      "name": "Mossnap",
+      "rarity": "Common",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Mossnap.png",
+      "baseValue": 10
+    },
+    {
+      "id": "chirplet",
+      "name": "Chirplet",
+      "rarity": "Common",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Chirplet.png",
+      "baseValue": 10
+    },
+    {
+      "id": "aquava",
+      "name": "Aquava",
+      "rarity": "Rare",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Aquava.png",
+      "baseValue": 50
+    },
+    {
+      "id": "bloomhorn",
+      "name": "Bloomhorn",
+      "rarity": "Rare",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Bloomhorn.png",
+      "baseValue": 50
+    },
+    {
+      "id": "cragoon",
+      "name": "Cragoon",
+      "rarity": "Rare",
+      "biome": "Cave",
+      "sprite": "assets/monsters/Cragoon.png",
+      "baseValue": 50
+    },
+    {
+      "id": "emberjaw",
+      "name": "Emberjaw",
+      "rarity": "Rare",
+      "biome": "Volcano",
+      "sprite": "assets/monsters/Emberjaw.png",
+      "baseValue": 50
+    },
+    {
+      "id": "frostwing",
+      "name": "Frostwing",
+      "rarity": "Rare",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Frostwing.png",
+      "baseValue": 50
+    },
+    {
+      "id": "lumibun",
+      "name": "Lumibun",
+      "rarity": "Rare",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Lumibun.png",
+      "baseValue": 50
+    },
+    {
+      "id": "stormcub",
+      "name": "Stormcub",
+      "rarity": "Rare",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Stormcub.png",
+      "baseValue": 50
+    },
+    {
+      "id": "thornox",
+      "name": "Thornox",
+      "rarity": "Rare",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Thornox.png",
+      "baseValue": 50
+    },
+    {
+      "id": "aetherion",
+      "name": "Aetherion",
+      "rarity": "Legendary",
+      "biome": "Cosmic",
+      "sprite": "assets/monsters/Aetherion.png",
+      "baseValue": 250
+    },
+    {
+      "id": "lunaris",
+      "name": "Lunaris",
+      "rarity": "Legendary",
+      "biome": "Cosmic",
+      "sprite": "assets/monsters/Lunaris.png",
+      "baseValue": 250
+    },
+    {
+      "id": "pyroclast",
+      "name": "Pyroclast",
+      "rarity": "Legendary",
+      "biome": "Volcano",
+      "sprite": "assets/monsters/Pyroclast.png",
+      "baseValue": 250
+    },
+    {
+      "id": "solarax",
+      "name": "Solarax",
+      "rarity": "Legendary",
+      "biome": "Volcano",
+      "sprite": "assets/monsters/Solarax.png",
+      "baseValue": 250
+    },
+    {
+      "id": "starveil",
+      "name": "Starveil",
+      "rarity": "Legendary",
+      "biome": "Cosmic",
+      "sprite": "assets/monsters/Starveil.png",
+      "shinySprite": "assets/monsters/Starveil_shiny.png",
+      "baseValue": 250
+    },
+    {
+      "id": "tempestra",
+      "name": "Tempestra",
+      "rarity": "Legendary",
+      "biome": "Sky",
+      "sprite": "assets/monsters/Tempestra.png",
+      "baseValue": 250
+    },
+    {
+      "id": "verdantor",
+      "name": "Verdantor",
+      "rarity": "Legendary",
+      "biome": "Forest",
+      "sprite": "assets/monsters/Verdantor.png",
+      "baseValue": 250
+    }
+  ]
+}

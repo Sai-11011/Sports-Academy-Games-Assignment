@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathomon Catcher</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game">
+
+    <!-- =====================================================
+         TOP HUD
+    ====================================================== -->
+
+    <header id="topHud">
+
+        <div class="hud-group">
+
+            <div class="stat-card">
+                <span class="stat-label">Caught</span>
+                <span id="caughtCount">0</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">Species</span>
+                <span id="speciesCount">0 / 25</span>
+                <div class="mini-bar-outer">
+                    <div id="speciesBarInner" class="mini-bar-inner"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">Collection</span>
+                <span id="collectionPercent">0%</span>
+                <div class="mini-bar-outer">
+                    <div id="collectionBarInner" class="mini-bar-inner"></div>
+                </div>
+            </div>
+
+            <div class="stat-card shiny-card">
+                <span class="stat-label">Shinies</span>
+                <span id="shinyCount">0</span>
+            </div>
+
+        </div>
+
+        <div class="hud-group hud-secondary">
+
+            <div class="stat-card combo-card">
+                <span class="stat-label">
+                    Capture Streak
+                </span>
+
+                <span id="comboCount">
+                    x0
+                </span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">
+                    Best Streak
+                </span>
+
+                <span id="bestCombo">
+                    0
+                </span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">
+                    Rank
+                </span>
+
+                <span id="rankText">
+                    Novice
+                </span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">
+                    XP
+                </span>
+
+                <span id="xpText">
+                    0
+                </span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- =====================================================
+         ARENA
+    ====================================================== -->
+
+    <main id="arena">
+
+        <!-- BIOME -->
+
+        <div id="biomeBackground"></div>
+
+        <!-- PARTICLES -->
+
+        <div id="particleLayer"></div>
+
+        <!-- EFFECTS -->
+
+        <div id="effectLayer">
+
+            <div id="flashOverlay"></div>
+
+            <div id="rareEncounterBanner">
+                RARE ENCOUNTER
+            </div>
+
+            <div id="legendaryEncounterBanner">
+                ⭐ LEGENDARY ENCOUNTER ⭐
+            </div>
+
+            <div id="captureFeedbackBanner"></div>
+
+            <div id="shinyBanner">
+                ✨ SHINY ENCOUNTER ✨
+            </div>
+
+        </div>
+
+        <!-- MONSTER -->
+
+        <section id="monsterStage">
+
+            <div id="monsterGlow"></div>
+
+            <img
+                id="monsterSprite"
+                src=""
+                alt="Monster"
+            >
+
+            <div id="shinySparkles"></div>
+
+        </section>
+
+        <!-- MONSTER INFO -->
+
+        <section id="monsterInfo">
+
+            <div id="monsterName">
+                Loading...
+            </div>
+
+            <div id="monsterMeta">
+
+                <span id="monsterRarity">
+                    Common
+                </span>
+
+                <span id="monsterBiome">
+                    Forest
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- TEMPER BAR -->
+
+        <section id="timerContainer">
+
+            <div class="meter-title">
+                <span id="timerLabel">Time Remaining</span>
+                <span id="timerText">6s</span>
+            </div>
+
+            <div id="timerBarOuter">
+
+                <div id="timerBarInner"></div>
+
+            </div>
+
+        </section>
+
+        <!-- CAPTURE ORB -->
+
+        <div id="captureLayer">
+
+            <div id="captureOrb"></div>
+
+        </div>
+
+        <!-- MATH PANEL -->
+
+        <section id="mathPanel">
+
+            <div id="orbChargeDisplay">
+                Orb Charge: <span id="orbChargePercent">0%</span>
+                <span class="orb-charge-sep">|</span>
+                Catch Chance: <span id="catchChancePercent">0%</span>
+            </div>
+
+            <div id="orbChargeBarOuter">
+                <div id="orbChargeBarInner"></div>
+            </div>
+
+            <div id="mathTitle">
+                Solve Math → Charge Orb → Throw
+            </div>
+
+            <div id="mathQuestion">
+                5 + 4
+            </div>
+
+            <input
+                id="mathAnswer"
+                type="number"
+                autocomplete="off"
+                placeholder="Answer"
+            >
+
+            <button id="submitAnswer">
+                Throw Orb
+            </button>
+
+        </section>
+
+    </main>
+
+    <!-- =====================================================
+         BOTTOM BAR
+    ====================================================== -->
+
+    <footer id="bottomBar">
+
+        <button id="journalButton">
+            Collection
+        </button>
+
+        <button id="statsButton">
+            Statistics
+        </button>
+
+        <button id="settingsButton">
+            Settings
+        </button>
+
+    </footer>
+
+</div>
+
+<!-- =====================================================
+     COLLECTION MODAL
+===================================================== -->
+
+<div
+    id="collectionModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                Monster Journal
+            </h2>
+
+            <button
+                class="closeModal"
+            >
+                ✕
+            </button>
+
+        </div>
+
+        <div id="journalProgressContainer">
+            <div class="journal-progress-header">
+                <span>Journal Completion</span>
+                <span id="journalProgressText">0 / 25 (0%)</span>
+            </div>
+            <div class="journal-progress-bar-outer">
+                <div id="journalProgressBarInner" class="journal-progress-bar-inner"></div>
+            </div>
+        </div>
+
+        <div id="collectionGrid">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     STATS MODAL
+===================================================== -->
+
+<div
+    id="statsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                Statistics
+            </h2>
+
+            <button
+                class="closeModal"
+            >
+                ✕
+            </button>
+
+        </div>
+
+        <div id="statsContent">
+
+            <div class="stats-row">
+                Total Encounters
+                <span id="totalEncounters">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Total Captures
+                <span id="totalCaptures">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Total Escapes
+                <span id="totalEscapes">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Rare Seen
+                <span id="rareSeen">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Legendary Seen
+                <span id="legendarySeen">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Shinies Found
+                <span id="totalShinies">
+                    0
+                </span>
+            </div>
+
+            <div class="stats-row">
+                Best Combo
+                <span id="bestComboStat">
+                    0
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     SETTINGS MODAL
+===================================================== -->
+
+<div
+    id="settingsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                Settings
+            </h2>
+
+            <button
+                class="closeModal"
+            >
+                ✕
+            </button>
+
+        </div>
+
+        <div class="settings-row">
+
+            <label>
+                Sound Effects
+            </label>
+
+            <input
+                id="soundToggle"
+                type="checkbox"
+                checked
+            >
+
+        </div>
+
+        <div class="settings-row">
+
+            <button
+                id="resetProgress"
+            >
+                Reset Save
+            </button>
+
+        </div>
+
+        <div class="settings-row" style="margin-top: 8px;">
+
+            <a href="index.html" style="display: block; width: 100%; text-align: center; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.08); color: white; text-decoration: none; font-weight: 700; font-size: 14px; transition: 0.2s; border: 1px solid rgba(255, 255, 255, 0.15);">
+                How to Play (Main Menu)
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     ACHIEVEMENT TOASTS
+===================================================== -->
+
+<div id="achievementContainer"></div>
+
+<!-- =====================================================
+     FUTURE SYSTEMS
+===================================================== -->
+
+<div hidden>
+
+    <div id="orbInventory"></div>
+
+    <div id="evolutionContainer"></div>
+
+    <div id="questContainer"></div>
+
+    <div id="dailyRewardContainer"></div>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>

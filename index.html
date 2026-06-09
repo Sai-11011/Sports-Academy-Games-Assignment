@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Academy Games Assignment - Sai Srinivas</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #f59e0b;
+            color: #111827;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .play-btn:hover {
+            background: #fbbf24;
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Sports Academy Games Assignment</h1>
+
+    <p class="subtitle">
+        Web-Based Game Developer Prototype Submission<br>
+        Sai Srinivas
+    </p>
+
+    <div class="games">
+
+        <div class="card">
+            <h2>🏀 Dunk Digits</h2>
+
+            <p>
+                A fast-paced basketball math game where players solve equations by
+                selecting the correct basketball answer and shooting it into the hoop.
+            </p>
+
+            <a class="play-btn" href="./dunk-digits/">
+                Play Dunk Digits
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>👾 Mathomon</h2>
+
+            <p>
+                A monster-catching prototype where players solve math challenges
+                to capture creatures before they escape.
+            </p>
+
+            <a class="play-btn" href="./mons/">
+                Play Mathomon
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Built with Godot • AI-Assisted Development Workflow
+    </div>
+
+</div>
+
+</body>
+</html>

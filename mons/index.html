@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathomon Catcher — How to Play</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Special Landing Page Styles */
+        body.landing-page {
+            overflow-y: auto;
+            background: radial-gradient(circle at center, #1e1b4b, #09090b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #landingContainer {
+            width: min(850px, 95vw);
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .title-glow {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24, #ef4444, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: clamp(14px, 2.5vw, 17px);
+            opacity: 0.85;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .guide-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .card-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .guide-card:nth-child(2) .card-number { color: #f472b6; }
+        .guide-card:nth-child(3) .card-number { color: #fbbf24; }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .card-desc {
+            font-size: 12.5px;
+            opacity: 0.75;
+            line-height: 1.5;
+            color: #94a3b8;
+        }
+
+        /* Interactive Trial Widget */
+        .trial-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .trial-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trial-interactive {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .trial-orb-wrapper {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trial-orb {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle at top, #ffffff, #ef4444);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .trial-orb.charged {
+            background: radial-gradient(circle at top, #ffffff, #10b981);
+            box-shadow: 0 0 25px #10b981, 0 0 8px rgba(16, 185, 129, 0.5);
+            transform: scale(1.15);
+        }
+
+        .trial-math {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .trial-input {
+            width: 90px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .trial-input:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 10px rgba(167, 139, 250, 0.2);
+        }
+
+        .trial-feedback {
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: #94a3b8;
+            height: 18px;
+        }
+
+        .trial-feedback.success {
+            color: #10b981;
+        }
+
+        /* Action Play Button */
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #052e16;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            border-radius: 14px;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.5);
+            color: #052e16;
+        }
+
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Mini Monster Showcase */
+        .showcase-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        .showcase-monsters {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            opacity: 0.75;
+            flex-wrap: wrap;
+        }
+
+        .showcase-monsters img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            transition: all 0.2s ease;
+        }
+
+        .showcase-monsters img:hover {
+            transform: scale(1.2) rotate(8deg);
+            opacity: 1;
+        }
+
+        /* Hide landing view layout scroll limits when in guide */
+        @media(max-height: 800px) {
+            body.landing-page {
+                padding: 10px;
+            }
+            #landingContainer {
+                padding: 24px;
+            }
+            .guide-grid {
+                margin-bottom: 24px;
+            }
+            .trial-box {
+                margin-bottom: 24px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+
+<div id="landingContainer">
+
+    <h1 class="title-glow">MATHOMON CATCHER</h1>
+    <p class="subtitle">A strategic mental math battle game. Ready your calculations!</p>
+
+    <!-- Guide Grid -->
+    <div class="guide-grid">
+        <div class="guide-card">
+            <div class="card-number">01</div>
+            <div class="card-title">Solve to Charge</div>
+            <div class="card-desc">Type the correct answer and press Enter. Correct answers charge your Capture Orb (Common = 100%, Rare = 50%, Legendary = 33%).</div>
+        </div>
+        <div class="guide-card">
+            <div class="card-number">02</div>
+            <div class="card-title">Watch the Timer</div>
+            <div class="card-desc">Monsters will run away if the timer expires! Commons are fast (6s), Rares give you 10s, and Legendaries afford you 15s.</div>
+        </div>
+        <div class="guide-card">
+            <div class="card-number">03</div>
+            <div class="card-title">Catch & Shiny Hunt</div>
+            <div class="card-desc">The orb is thrown on every correct answer. Catch chance matches your current charge percentage. Look out for 2% Shiny Spawns!</div>
+        </div>
+    </div>
+
+    <!-- Trial Math Box -->
+    <div class="trial-box">
+        <div class="trial-header">Practice Trial: Charge the Orb</div>
+        <div class="trial-interactive">
+            <div class="trial-orb-wrapper">
+                <div id="trialOrb" class="trial-orb"></div>
+            </div>
+            <div id="trialQuestion" class="trial-math">6 + 7</div>
+            <div style="font-size: 20px; font-weight: 700; opacity: 0.6;">=</div>
+            <input id="trialAnswer" type="number" class="trial-input" placeholder="?" autocomplete="off">
+        </div>
+        <div id="trialFeedback" class="trial-feedback">Solve the question to fully charge the Capture Orb.</div>
+    </div>
+
+    <!-- Play Button -->
+    <a href="play.html" class="play-btn">
+        ENTER ARENA →
+    </a>
+
+    <!-- Mini Showcase -->
+    <div class="showcase-title">Monster Journal Sneak Peek</div>
+    <div class="showcase-monsters">
+        <img src="assets/monsters/Spriggle.png" alt="Spriggle" title="Spriggle">
+        <img src="assets/monsters/Pebblit.png" alt="Pebblit" title="Pebblit">
+        <img src="assets/monsters/Aquava.png" alt="Aquava" title="Aquava">
+        <img src="assets/monsters/Emberjaw.png" alt="Emberjaw" title="Emberjaw">
+        <img src="assets/monsters/Starveil.png" alt="Starveil" title="Starveil">
+        <img src="assets/monsters/Verdantor.png" alt="Verdantor" title="Verdantor">
+    </div>
+
+</div>
+
+<!-- Trial JavaScript Code -->
+<script>
+    let currentAns = 13;
+    let audioCtx = null;
+
+    function getAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        return audioCtx;
+    }
+
+    function playTone(freq, duration) {
+        try {
+            const ctx = getAudio();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + duration);
+            gain.gain.setValueAtTime(0.06, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+        } catch (e) {
+            console.log("Audio not enabled yet");
+        }
+    }
+
+    function generateQuestion() {
+        const a = Math.floor(Math.random() * 8) + 2;
+        const b = Math.floor(Math.random() * 8) + 2;
+        currentAns = a + b;
+        document.getElementById("trialQuestion").textContent = `${a} + ${b}`;
+        const input = document.getElementById("trialAnswer");
+        input.value = "";
+        input.disabled = false;
+        input.focus();
+        document.getElementById("trialOrb").className = "trial-orb";
+        document.getElementById("trialFeedback").textContent = "Solve the question to fully charge the Capture Orb.";
+        document.getElementById("trialFeedback").className = "trial-feedback";
+    }
+
+    document.getElementById("trialAnswer").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            const val = Number(this.value);
+            const feedback = document.getElementById("trialFeedback");
+            const orb = document.getElementById("trialOrb");
+            
+            if (val === currentAns) {
+                playTone(1500, 0.05);
+                orb.className = "trial-orb charged";
+                feedback.textContent = "100% Charged! You're ready. Click ENTER ARENA to begin!";
+                feedback.className = "trial-feedback success";
+                this.disabled = true;
+                
+                // Reset trial after 2.5 seconds to practice again
+                setTimeout(generateQuestion, 2500);
+            } else {
+                feedback.textContent = "Incorrect. Try again!";
+                feedback.className = "trial-feedback";
+                this.value = "";
+            }
+        }
+    });
+
+    // Auto-focus on load
+    window.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("trialAnswer").focus();
+    });
+</script>
+
+</body>
+</html>
