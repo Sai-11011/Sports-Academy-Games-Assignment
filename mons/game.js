@@ -733,6 +733,12 @@ async function correctAnswer()
     await showCaptureFeedback("charge", `Orb Charge: ${percent}%`);
 
     await throwOrb();
+
+    if(!gameState.encounterActive)
+    {
+        return;
+    }
+
     resolveOrbThrow();
 }
 
@@ -790,7 +796,6 @@ function resolveOrbThrow()
             gameState.stats.criticals++;
         }
 
-        endEncounter();
         successfulCatch(critical);
         return;
     }
@@ -800,14 +805,12 @@ function resolveOrbThrow()
     if(critical)
     {
         gameState.stats.criticals++;
-        endEncounter();
         successfulCatch(true);
         return;
     }
 
     if(Math.random() < chance)
     {
-        endEncounter();
         successfulCatch(false);
     }
     else
@@ -878,6 +881,18 @@ async function showCaptureFeedback(type, text)
 
 function successfulCatch(critical = false)
 {
+    if(!gameState.currentMonster)
+    {
+        return;
+    }
+
+    if(!gameState.encounterActive)
+    {
+        return;
+    }
+
+    endEncounter();
+
     setMathEnabled(false);
     gameState.stats.catches++;
     gameState.streak++;
@@ -922,6 +937,11 @@ function successfulCatch(critical = false)
 
 function monsterEscape()
 {
+    if(!gameState.encounterActive)
+    {
+        return;
+    }
+
     endEncounter();
     gameState.stats.escapes++;
     gameState.streak = 0;
